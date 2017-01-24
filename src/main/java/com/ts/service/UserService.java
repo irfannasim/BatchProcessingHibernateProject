@@ -38,6 +38,18 @@ public class UserService {
         return ids;
     }
 
+    public void archiveUsersBatch(List<Integer> userIds) {
+        LogUtil.log("archiveUsersBatch starts for " + userIds.size() + "records " + "at: " + System.currentTimeMillis(), Level.INFO, null);
+
+        try {
+            userDAO.archiveUsersBatch(userIds);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        LogUtil.log("archiveUsersBatch ends for " + userIds.size() + "records " + "at: " + System.currentTimeMillis(), Level.INFO, null);
+    }
+
     public void deleteUsersBatch(List<Integer> userIds) {
         LogUtil.log("deleteUsersBatch starts for " + userIds.size() + "records " + "at: " + System.currentTimeMillis(), Level.INFO, null);
 
@@ -50,6 +62,43 @@ public class UserService {
         LogUtil.log("deleteUsersBatch ends for " + userIds.size() + "records " + "at: " + System.currentTimeMillis(), Level.INFO, null);
     }
 
+    public void deleteUsersBatchUserObjects(List<User> users) {
+        LogUtil.log("deleteUsersBatchUserObjects starts for " + users.size() + "records " + "at: " + System.currentTimeMillis(), Level.INFO, null);
+
+        try {
+            userDAO.deleteUsersBatchUserObjects(users);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        LogUtil.log("deleteUsersBatchUserObjects ends for " + users.size() + "records " + "at: " + System.currentTimeMillis(), Level.INFO, null);
+    }
+
+    public List<User> getUsersByLimit(int limit) {
+        LogUtil.log("getUsersByLimit starts for " + limit + "records " + "at: " + System.currentTimeMillis(), Level.INFO, null);
+        List<User> users = null;
+
+        try {
+            users = userDAO.getUsersByLimit(limit);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        LogUtil.log("getUsersByLimit ends for " + limit + "records " + "at: " + System.currentTimeMillis(), Level.INFO, null);
+        return users;
+    }
+
+    public void addUsersBatch(List<User> users) {
+        LogUtil.log("addUsersBatch starts for " + users.size() + "records " + "at: " + System.currentTimeMillis(), Level.INFO, null);
+
+        try {
+            userDAO.addUsersBatch(users);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        LogUtil.log("addUsersBatch ends for " + users.size() + "records " + "at: " + System.currentTimeMillis(), Level.INFO, null);
+    }
 
     private String buildStringOfIds(List<Integer> dbIds) {
 
